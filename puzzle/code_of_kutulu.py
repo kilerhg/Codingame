@@ -73,7 +73,7 @@ def verify_fix_isolated(list_explorers, my_pos):
     for explorer in list_explorers:
         diff_x, diff_y = my_pos[0] - explorer['pos'][0], my_pos[1] - explorer['pos'][1]
         diff_x_near, diff_y_near = my_pos[0] - near_explorer[0], my_pos[1] - near_explorer[1]
-        if abs(diff_x) <= 1 and abs(diff_y) <= 1:
+        if abs(diff_x) < 1 and abs(diff_y) < 1:
             is_isolated = False
             near_explorer = 0, 0
             break
@@ -123,6 +123,9 @@ while True:
             #if param_2 in ids_worry:
             diff_x, diff_y = my_pos[0]-x, my_pos[1]-y
 
+            if abs(diff_x) <= 2 and abs(diff_y) <= 2:
+                valid_light = True
+
             if abs(diff_x) <= 1 and abs(diff_y) <= 1 and (diff_x == 0 or diff_y == 0):
                 print("Danger", file=sys.stderr, flush=True)
                 if diff_x > 0:
@@ -157,20 +160,15 @@ while True:
     # Write an action using print
     # To debug: print("Debug messages...", file=sys.stderr, flush=True)
 
-    '''if is_first:
-        is_first = False
-        print('MOVE 2 1')'''
-
-
     is_isolated, near_explorer = verify_fix_isolated(list_explorers=list_explorers, my_pos=my_pos)
 
     print(f'is_isolated: {is_isolated}', file=sys.stderr, flush=True)
     print(f'near_explorer: {near_explorer}', file=sys.stderr, flush=True)
 
-    if param_mov[2]:
-        print(f'MOVE {param_mov[0]} {param_mov[1]}')
-    elif is_isolated:
+    if is_isolated:
         print(f'MOVE {near_explorer[0]} {near_explorer[1]}')
+    elif param_mov[2]:
+        print(f'MOVE {param_mov[0]} {param_mov[1]}')
     elif delay:
         delay -= 1
         print("WAIT")
