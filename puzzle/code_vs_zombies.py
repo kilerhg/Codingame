@@ -12,7 +12,6 @@ def zombies_to_human(list_humans, list_zombies):
     for zombie in list_zombies:
         x_z, y_z = zombie[1], zombie[2]
         min_value = 100_000_000
-        is_first = True
         id_zombie = zombie[0]
         for human in list_humans:
             x_h, y_h = human[1], human[2]

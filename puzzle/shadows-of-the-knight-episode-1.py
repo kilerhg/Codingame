@@ -28,7 +28,7 @@ while True:
         max_x = min_x = x
         max_y = y-1
     elif bomb_dir == 'UR':
-        possible_range = [[x+1, y-1https://www.codingame.com/ide/puzzle/], [max_x, min_y]]
+        possible_range = [[x+1, y-1], [max_x, min_y]]
         min_x = x+1
         max_y = y-1
     elif bomb_dir == 'R':
